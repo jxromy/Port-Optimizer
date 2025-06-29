@@ -1,0 +1,37 @@
+                [Truck GPS / IoT Data]
+                          │
+                [Port TOS / Crane Logs]
+                          │
+                [Historical CSVs / APIs]
+                          │
+                     ┌────────────┐
+                     │  Ingestion │ ← (Cloud Pub/Sub / Kafka / EventBridge)
+                     └────┬───────┘
+                          ▼
+                   ┌─────────────┐
+                   │ Data Lake   │ ← (Cloud Storage / BigQuery / S3)
+                   └────┬────────┘
+                        ▼
+                ┌──────────────┐
+                │Feature Store │ ← (Vertex AI FS / Feast / Databricks)
+                └────┬─────────┘
+                     ▼
+            ┌──────────────────┐
+            │ Model Training   │ ← (XGBoost, LightGBM, LSTM for time series)
+            └──────┬───────────┘
+                   ▼
+           ┌────────────────────┐
+           │ Model Registry     │ ← (MLflow / Vertex AI Model Registry)
+           └──────┬─────────────┘
+                  ▼
+         ┌─────────────────────┐
+         │  Prediction Service │ ← (Cloud Run / SageMaker Endpoint / Vertex AI)
+         └────────┬────────────┘
+                  ▼
+         ┌─────────────────────┐
+         │Scheduling Optimizer│ ← (Google OR-Tools / OptaPlanner)
+         └────────┬────────────┘
+                  ▼
+            ┌─────────────┐
+            │ Web / Mobile│ ← UI for drivers + port operators
+            └─────────────┘
